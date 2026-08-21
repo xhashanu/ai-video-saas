@@ -1,6 +1,12 @@
 import { VideoProject } from 'wasp/entities';
 import { GenerateScript, CreateVideoProject, GetVideoProjects } from 'wasp/server/operations';
 import { HttpError } from 'wasp/server';
+import { renderVideoJob } from 'wasp/server/jobs';
+import OpenAI from 'openai';
+
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY, // Note: must be set in .env.server
+});
 
 export const generateScript: GenerateScript<
   { topic: string; tone: string; length: string },
@@ -10,11 +16,28 @@ export const generateScript: GenerateScript<
     throw new HttpError(401, 'User must be authenticated');
   }
 
-  // TODO: Call OpenAI API here. For now, return a mock script.
-  // In a real app, you would use OpenAI SDK here.
-  const mockScript = `[Person A]: Did you hear about ${topic}?\n[Person B]: Yeah, it's wild! Tell me more in a ${tone} way.\n[Person A]: Well, here is a ${length} summary...`;
-  
-  return { script: mockScript };
+  try {
+    const response = await openai.chat.completions.create({
+      model: "gpt-4o",
+      messages: [
+        {
+          role: "system",
+          content: "You are a creative scriptwriter. Write a 2-person dialogue script for a short-form video. Do not include stage directions, just [Person A]: text and [Person B]: text."
+        },
+        {
+          role: "user",
+          content: `Write a script about ${topic}. The tone should be ${tone}. The length should be approximately ${length}.`
+        }
+      ],
+      temperature: 0.7,
+    });
+
+    const script = response.choices[0].message?.content || 'Failed to generate script';
+    return { script };
+  } catch (error: any) {
+    console.error("OpenAI Error:", error);
+    throw new HttpError(500, 'Failed to generate script with AI');
+  }
 };
 
 export const createVideoProject: CreateVideoProject<
@@ -47,7 +70,8 @@ export const createVideoProject: CreateVideoProject<
     },
   });
 
-  // TODO: Dispatch a background Wasp Job here to process the video using Remotion or FFmpeg.
+  // Dispatch background Wasp Job here to process the video using Remotion or FFmpeg.
+  await renderVideoJob.submit({ projectId: project.id });
 
   return project;
 };

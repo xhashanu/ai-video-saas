@@ -1,4 +1,4 @@
-import { action, page, query, route, type Spec } from "@wasp.sh/spec";
+import { action, page, query, route, job, type Spec } from "@wasp.sh/spec";
 
 import { DashboardPage } from "./DashboardPage" with { type: "ref" };
 import { CreateTextStoryPage } from "./CreateTextStoryPage" with { type: "ref" };
@@ -23,6 +23,8 @@ import {
   getVideoProjects,
 } from "./operations" with { type: "ref" };
 
+import { renderVideoJob } from "./jobs" with { type: "ref" };
+
 export const videoGenSpec: Spec = [
   route("DashboardRoute", "/dashboard", page(DashboardPage, { authRequired: true })),
   route("CreateTextStoryRoute", "/create/text-story", page(CreateTextStoryPage, { authRequired: true })),
@@ -44,4 +46,9 @@ export const videoGenSpec: Spec = [
   query(getVideoProjects, { entities: ["User", "VideoProject"] }),
   action(generateScript, { entities: ["User"] }),
   action(createVideoProject, { entities: ["User", "VideoProject"] }),
+
+  job(renderVideoJob, {
+    executor: "PgBoss",
+    entities: ["VideoProject"],
+  }),
 ];
