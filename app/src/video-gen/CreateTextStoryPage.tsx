@@ -1,3 +1,4 @@
+import { SidebarLayout } from './SidebarLayout';
 import React, { useState } from 'react';
 import { useAction } from 'wasp/client/operations';
 import { generateScript, createVideoProject } from 'wasp/client/operations';
@@ -41,7 +42,7 @@ export const CreateTextStoryPage = () => {
   };
 
   return (
-    <div className="p-8 max-w-4xl mx-auto dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen">
+    <SidebarLayout><div className="p-8 max-w-4xl mx-auto dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen">
       <div className="flex items-center justify-between mb-8">
         <h1 className="text-3xl font-bold">Create Text Story</h1>
         <div className="flex gap-2">
@@ -150,6 +151,6 @@ export const CreateTextStoryPage = () => {
           </div>
         )}
       </div>
-    </div>
+    </div></SidebarLayout>
   );
 };

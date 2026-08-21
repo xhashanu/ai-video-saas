@@ -1,86 +1,94 @@
 import React from 'react';
 import { Link } from 'wasp/client/router';
-import { useQuery } from 'wasp/client/operations';
-import { getVideoProjects } from 'wasp/client/operations';
+import { SidebarLayout } from './SidebarLayout';
 
 export const DashboardPage = () => {
-  const { data: projects, isLoading } = useQuery(getVideoProjects);
-
   return (
-    <div className="p-8 max-w-7xl mx-auto dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen">
-      <h1 className="text-4xl font-bold mb-8">Hello, what would you like to create today?</h1>
-      
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-        <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg hover:shadow-xl transition-shadow border border-gray-100 dark:border-gray-700">
-          <h2 className="text-2xl font-bold mb-2 text-indigo-600 dark:text-indigo-400">Text Story</h2>
-          <p className="text-gray-600 dark:text-gray-400 mb-6 text-sm">
-            Create text-based stories, complete with gameplay elements and crisp AI voiceovers.
-          </p>
-          <Link to="/create/text-story" className="block text-center bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 transition-colors text-sm">
-            Create
-          </Link>
+    <SidebarLayout>
+      <div className="max-w-6xl mx-auto">
+        <div className="text-center mb-12 mt-8">
+          <h1 className="text-3xl font-bold mb-8">Hello, what would you like to create today?</h1>
+          
+          <div className="flex justify-center gap-4">
+            <button className="flex items-center gap-2 px-6 py-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl shadow-sm hover:shadow transition font-medium">
+              ⚡ Quick Editor
+            </button>
+            <button className="flex items-center gap-2 px-6 py-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl shadow-sm hover:shadow transition font-medium">
+              🎬 Full Editor
+            </button>
+            <button className="flex items-center gap-2 px-6 py-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl shadow-sm hover:shadow transition font-medium">
+              🤖 AI Videos
+            </button>
+          </div>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg hover:shadow-xl transition-shadow border border-gray-100 dark:border-gray-700">
-          <h2 className="text-2xl font-bold mb-2 text-blue-600 dark:text-blue-400">Video Commentary</h2>
-          <p className="text-gray-600 dark:text-gray-400 mb-6 text-sm">
-            Convert scripts into screen-ready video commentaries with a simulated voiceover.
-          </p>
-          <Link to="/create/video-commentary" className="block text-center bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors text-sm">
-            Create
-          </Link>
-        </div>
-
-        <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg hover:shadow-xl transition-shadow border border-gray-100 dark:border-gray-700">
-          <h2 className="text-2xl font-bold mb-2 text-purple-600 dark:text-purple-400">Video Ranking</h2>
-          <p className="text-gray-600 dark:text-gray-400 mb-6 text-sm">
-            Combine videos and rank them — perfect for top lists and viral reviews.
-          </p>
-          <Link to="/create/video-ranking" className="block text-center bg-purple-600 text-white py-2 px-4 rounded-lg hover:bg-purple-700 transition-colors text-sm">
-            Create
-          </Link>
-        </div>
-
-        <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg hover:shadow-xl transition-shadow border border-gray-100 dark:border-gray-700">
-          <h2 className="text-2xl font-bold mb-2 text-teal-600 dark:text-teal-400">Auto Clipping</h2>
-          <p className="text-gray-600 dark:text-gray-400 mb-6 text-sm">
-            Automatically find highlights from long-form videos and convert them into shorts.
-          </p>
-          <Link to="/create/auto-clipping" className="block text-center bg-teal-600 text-white py-2 px-4 rounded-lg hover:bg-teal-700 transition-colors text-sm">
-            Create
-          </Link>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <ToolCard 
+            title="Video Ranking" 
+            description="Combine videos and rank them — perfect for top lists and viral reviews."
+            imagePlaceholder="📊"
+            linkTo="/create/video-ranking"
+            buttonText="Start Ranking"
+          />
+          <ToolCard 
+            title="Auto Clipping" 
+            description="AI finds viral moments and cuts them into short clips"
+            imagePlaceholder="✂️"
+            linkTo="/create/auto-clipping"
+            buttonText="Clip It Now"
+          />
+          <ToolCard 
+            title="Video Commentary" 
+            description="Convert scripts into screen"
+            imagePlaceholder="💬"
+            linkTo="/create/video-commentary"
+            buttonText="Create Video Commentary"
+          />
+          <ToolCard 
+            title="Text Story" 
+            description="Create text-based stories, complete with gameplay elements and crisp AI voiceovers."
+            imagePlaceholder="📝"
+            linkTo="/create/text-story"
+            buttonText="Create Text Story"
+          />
+          <ToolCard 
+            title="Generate AI Voiceover" 
+            description="Create humanlike AI voices in seconds, generate any voice with stunning accuracy and expression."
+            imagePlaceholder="🎙️"
+            linkTo="/create/generate-voiceover"
+            buttonText="Create Voiceover"
+          />
+          <ToolCard 
+            title="Generate Image" 
+            description="Create a clip in seconds with the power of our AI tools"
+            imagePlaceholder="🖼️"
+            linkTo="/create/ai-image-generator"
+            buttonText="Generate Image"
+          />
+          <ToolCard 
+            title="Video Transcriber" 
+            description="Instantly turn any video into a readable script with timestamps"
+            imagePlaceholder="📝"
+            linkTo="/create/video-transcriber"
+            buttonText="Create Transcriptions"
+          />
         </div>
       </div>
-
-      <h2 className="text-3xl font-bold mb-6">Your Recent Projects</h2>
-      {isLoading ? (
-        <p>Loading projects...</p>
-      ) : projects?.length === 0 ? (
-        <p className="text-gray-500">You haven't created any videos yet.</p>
-      ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          {projects?.map((p) => (
-            <div key={p.id} className="bg-white dark:bg-gray-800 p-4 rounded-xl shadow border border-gray-200 dark:border-gray-700">
-              <h3 className="font-semibold text-lg truncate">{p.title}</h3>
-              <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Type: {p.type}</p>
-              <div className="mt-4 flex items-center justify-between">
-                <span className={`px-2 py-1 text-xs rounded-full ${
-                  p.status === 'COMPLETED' ? 'bg-green-100 text-green-800' : 
-                  p.status === 'PROCESSING' ? 'bg-yellow-100 text-yellow-800' : 
-                  'bg-gray-100 text-gray-800'
-                }`}>
-                  {p.status}
-                </span>
-                {p.finalVideoUrl && (
-                  <a href={p.finalVideoUrl} target="_blank" rel="noreferrer" className="text-indigo-600 text-sm hover:underline">
-                    View
-                  </a>
-                )}
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
+    </SidebarLayout>
   );
 };
+
+const ToolCard = ({ title, description, imagePlaceholder, linkTo, buttonText }: any) => (
+  <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden flex flex-col hover:shadow-md transition">
+    <div className="h-40 bg-gray-100 dark:bg-gray-700 flex items-center justify-center text-4xl border-b border-gray-200 dark:border-gray-600">
+      {imagePlaceholder}
+    </div>
+    <div className="p-6 flex-1 flex flex-col">
+      <h3 className="text-xl font-bold mb-2">{title}</h3>
+      <p className="text-sm text-gray-600 dark:text-gray-400 flex-1 mb-6">{description}</p>
+      <Link to={linkTo} className="block text-center w-full bg-blue-50 hover:bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400 font-semibold py-2 px-4 rounded-lg transition-colors">
+        {buttonText}
+      </Link>
+    </div>
+  </div>
+);

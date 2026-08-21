@@ -1,3 +1,4 @@
+import { SidebarLayout } from './SidebarLayout';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
 
@@ -14,7 +15,7 @@ export const CreateVideoCommentaryPage = () => {
   };
 
   return (
-    <div className="p-8 max-w-4xl mx-auto dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen">
+    <SidebarLayout><div className="p-8 max-w-4xl mx-auto dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen">
       <h1 className="text-3xl font-bold mb-8">Create Video Commentary</h1>
       <div className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow border border-gray-100 dark:border-gray-700">
         <div className="mb-6">
@@ -54,6 +55,6 @@ export const CreateVideoCommentaryPage = () => {
           Create Project
         </button>
       </div>
-    </div>
+    </div></SidebarLayout>
   );
 };
