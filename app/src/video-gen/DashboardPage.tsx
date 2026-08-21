@@ -10,38 +10,45 @@ export const DashboardPage = () => {
     <div className="p-8 max-w-7xl mx-auto dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen">
       <h1 className="text-4xl font-bold mb-8">Hello, what would you like to create today?</h1>
       
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
         <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg hover:shadow-xl transition-shadow border border-gray-100 dark:border-gray-700">
           <h2 className="text-2xl font-bold mb-2 text-indigo-600 dark:text-indigo-400">Text Story</h2>
-          <p className="text-gray-600 dark:text-gray-400 mb-6">
+          <p className="text-gray-600 dark:text-gray-400 mb-6 text-sm">
             Create text-based stories, complete with gameplay elements and crisp AI voiceovers.
           </p>
-          <Link
-            to="/create/text-story"
-            className="block text-center bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 transition-colors"
-          >
-            Create Text Story
+          <Link to="/create/text-story" className="block text-center bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 transition-colors text-sm">
+            Create
           </Link>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg hover:shadow-xl transition-shadow border border-gray-100 dark:border-gray-700 opacity-50 cursor-not-allowed">
-          <h2 className="text-2xl font-bold mb-2">Video Commentary</h2>
-          <p className="text-gray-600 dark:text-gray-400 mb-6">
-            Convert scripts into screen-ready video commentaries.
+        <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg hover:shadow-xl transition-shadow border border-gray-100 dark:border-gray-700">
+          <h2 className="text-2xl font-bold mb-2 text-blue-600 dark:text-blue-400">Video Commentary</h2>
+          <p className="text-gray-600 dark:text-gray-400 mb-6 text-sm">
+            Convert scripts into screen-ready video commentaries with a simulated voiceover.
           </p>
-          <button disabled className="w-full bg-gray-300 dark:bg-gray-700 text-gray-500 py-2 px-4 rounded-lg">
-            Coming Soon
-          </button>
+          <Link to="/create/video-commentary" className="block text-center bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors text-sm">
+            Create
+          </Link>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg hover:shadow-xl transition-shadow border border-gray-100 dark:border-gray-700 opacity-50 cursor-not-allowed">
-          <h2 className="text-2xl font-bold mb-2">Video Ranking</h2>
-          <p className="text-gray-600 dark:text-gray-400 mb-6">
+        <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg hover:shadow-xl transition-shadow border border-gray-100 dark:border-gray-700">
+          <h2 className="text-2xl font-bold mb-2 text-purple-600 dark:text-purple-400">Video Ranking</h2>
+          <p className="text-gray-600 dark:text-gray-400 mb-6 text-sm">
             Combine videos and rank them — perfect for top lists and viral reviews.
           </p>
-          <button disabled className="w-full bg-gray-300 dark:bg-gray-700 text-gray-500 py-2 px-4 rounded-lg">
-            Coming Soon
-          </button>
+          <Link to="/create/video-ranking" className="block text-center bg-purple-600 text-white py-2 px-4 rounded-lg hover:bg-purple-700 transition-colors text-sm">
+            Create
+          </Link>
+        </div>
+
+        <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg hover:shadow-xl transition-shadow border border-gray-100 dark:border-gray-700">
+          <h2 className="text-2xl font-bold mb-2 text-teal-600 dark:text-teal-400">Auto Clipping</h2>
+          <p className="text-gray-600 dark:text-gray-400 mb-6 text-sm">
+            Automatically find highlights from long-form videos and convert them into shorts.
+          </p>
+          <Link to="/create/auto-clipping" className="block text-center bg-teal-600 text-white py-2 px-4 rounded-lg hover:bg-teal-700 transition-colors text-sm">
+            Create
+          </Link>
         </div>
       </div>
 
